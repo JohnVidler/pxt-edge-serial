@@ -8,6 +8,7 @@
     "files": [
         "main.blocks",
         "main.ts",
+        "edge_serial.cpp",
         "README.md"
     ],
     "testFiles": [],
