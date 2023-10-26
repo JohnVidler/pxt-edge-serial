@@ -9,6 +9,8 @@
         "main.blocks",
         "main.ts",
         "edge_serial.cpp",
+        "shims.d.ts",
+        "enums.d.ts",
         "README.md"
     ],
     "testFiles": [],
