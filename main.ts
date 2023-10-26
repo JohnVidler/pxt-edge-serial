@@ -2,7 +2,7 @@
  * Reading and writing data over a serial connection.
  */
 //% weight=2 color=#ff2050 icon="\uf287" block="Edge Serial"
-namespace edge_serial {
+namespace edgeserial {
     /**
      * The string used to mark a new line, default is \r\n
      */
@@ -16,19 +16,19 @@ namespace edge_serial {
      */
     //% weight=90
     //% help=serial/write-line blockGap=8
-    //% blockId=edge_serial_writeline block="serial|write line %text"
+    //% blockId=edgeserial_writeline block="serial|write line %text"
     //% text.shadowOptions.toString=true
     export function writeLine(text: string): void {
         if (!text) text = "";
-        edge_serial.writeString(text);
+        edgeserial.writeString(text);
         // pad data to the 32 byte boundary
         // to ensure apps receive the packet
         if (writeLinePadding > 0) {
             let r = (writeLinePadding - (text.length + NEW_LINE.length) % writeLinePadding) % writeLinePadding;
             for (let i = 0; i < r; ++i)
-                edge_serial.writeString(" ");
+                edgeserial.writeString(" ");
         }
-        edge_serial.writeString(NEW_LINE);
+        edgeserial.writeString(NEW_LINE);
     }
 
     /**
@@ -38,7 +38,7 @@ namespace edge_serial {
      */
     //% weight=1
     //% help=serial/set-write-line-padding
-    //% blockId=edge_serialWriteNewLinePadding block="serial set write line padding to $length"
+    //% blockId=edgeserialWriteNewLinePadding block="serial set write line padding to $length"
     //% advanced=true
     //% length.min=0 length.max=128
     export function setWriteLinePadding(length: number) {
@@ -50,7 +50,7 @@ namespace edge_serial {
      */
     //% help=serial/write-number
     //% weight=89 blockGap=8
-    //% blockId=edge_serial_writenumber block="serial|write number %value"
+    //% blockId=edgeserial_writenumber block="serial|write number %value"
     export function writeNumber(value: number): void {
         writeString(value.toString());
     }
@@ -60,7 +60,7 @@ namespace edge_serial {
      */
     //% help=serial/write-numbers
     //% weight=86
-    //% blockId=edge_serial_writenumbers block="serial|write numbers %values"
+    //% blockId=edgeserial_writenumbers block="serial|write numbers %values"
     export function writeNumbers(values: number[]): void {
         if (!values) return;
         for (let i = 0; i < values.length; ++i) {
@@ -77,7 +77,7 @@ namespace edge_serial {
      */
     //% weight=88 blockGap=8
     //% help=serial/write-value
-    //% blockId=edge_serial_writevalue block="serial|write value %name|= %value"
+    //% blockId=edgeserial_writevalue block="serial|write value %name|= %value"
     export function writeValue(name: string, value: number): void {
         writeLine((name ? name + ":" : "") + value);
     }
@@ -86,16 +86,16 @@ namespace edge_serial {
      * Read a line of text from the serial port.
      */
     //% help=serial/read-line
-    //% blockId=edge_serial_read_line block="serial|read line"
+    //% blockId=edgeserial_read_line block="serial|read line"
     //% weight=20 blockGap=8
     export function readLine(): string {
-        return edge_serial.readUntil(delimiters(NEW_LINE_DELIMITER));
+        return edgeserial.readUntil(delimiters(NEW_LINE_DELIMITER));
     }
 
     /**
      * Return the corresponding delimiter string
      */
-    //% blockId="edge_serial_delimiter_conv" block="%del"
+    //% blockId="edgeserial_delimiter_conv" block="%del"
     //% weight=1 blockHidden=true
     export function delimiters(del: Delimiters): string {
         return String.fromCharCode(del as number);

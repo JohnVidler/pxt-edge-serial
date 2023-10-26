@@ -3,23 +3,23 @@
 
 
     //% weight=2 color=#ff2050 icon="\uf287" block="Edge Serial"
-declare namespace edge_serial {
+declare namespace edgeserial {
 
     /**
      * Read a line of text from the serial port and return the buffer when the delimiter is met.
      * @param delimiter text delimiter that separates each text chunk
      */
     //% help=serial/read-until
-    //% blockId=edge_serial_read_until block="serial|read until %delimiter=edge_serial_delimiter_conv"
-    //% weight=19 shim=edge_serial::readUntil
+    //% blockId=edgeserial_read_until block="serial|read until %delimiter=edgeserial_delimiter_conv"
+    //% weight=19 shim=edgeserial::readUntil
     function readUntil(delimiter: string): string;
 
     /**
      * Read the buffered received data as a string
      */
     //% help=serial/read-string
-    //% blockId=edge_serial_read_buffer block="serial|read string"
-    //% weight=18 shim=edge_serial::readString
+    //% blockId=edgeserial_read_buffer block="serial|read string"
+    //% weight=18 shim=edgeserial::readString
     function readString(): string;
 
     /**
@@ -27,7 +27,7 @@ declare namespace edge_serial {
      * @param delimiters the characters to match received characters against.
      */
     //% help=serial/on-data-received
-    //% weight=18 blockId=edge_serial_on_data_received block="serial|on data received %delimiters=edge_serial_delimiter_conv" shim=edge_serial::onDataReceived
+    //% weight=18 blockId=edgeserial_on_data_received block="serial|on data received %delimiters=edgeserial_delimiter_conv" shim=edgeserial::onDataReceived
     function onDataReceived(delimiters: string, body: () => void): void;
 
     /**
@@ -35,15 +35,15 @@ declare namespace edge_serial {
      */
     //% help=serial/write-string
     //% weight=87 blockGap=8
-    //% blockId=edge_serial_writestring block="serial|write string %text"
-    //% text.shadowOptions.toString=true shim=edge_serial::writeString
+    //% blockId=edgeserial_writestring block="serial|write string %text"
+    //% text.shadowOptions.toString=true shim=edgeserial::writeString
     function writeString(text: string): void;
 
     /**
      * Send a buffer through serial connection
      */
-    //% blockId=edge_serial_writebuffer block="serial|write buffer %buffer=edge_serial_readbuffer"
-    //% help=serial/write-buffer advanced=true weight=6 shim=edge_serial::writeBuffer
+    //% blockId=edgeserial_writebuffer block="serial|write buffer %buffer=edgeserial_readbuffer"
+    //% help=serial/write-buffer advanced=true weight=6 shim=edgeserial::writeBuffer
     function writeBuffer(buffer: Buffer): void;
 
     /**
@@ -51,8 +51,8 @@ declare namespace edge_serial {
      * If length is positive, pauses until enough characters are present.
      * @param length default buffer length
      */
-    //% blockId=edge_serial_readbuffer block="serial|read buffer %length"
-    //% help=serial/read-buffer advanced=true weight=5 shim=edge_serial::readBuffer
+    //% blockId=edgeserial_readbuffer block="serial|read buffer %length"
+    //% help=serial/read-buffer advanced=true weight=5 shim=edgeserial::readBuffer
     function readBuffer(length: int32): Buffer;
 
     /**
@@ -63,23 +63,23 @@ declare namespace edge_serial {
      */
     //% weight=10
     //% help=serial/connect
-    //% blockId=edge_serial_redirect block="serial|connect to|TX %tx|RX %rx|at baud rate %rate"
+    //% blockId=edgeserial_redirect block="serial|connect to|TX %tx|RX %rx|at baud rate %rate"
     //% blockExternalInputs=1
     //% tx.fieldEditor="gridpicker" tx.fieldOptions.columns=3
     //% tx.fieldOptions.tooltips="false"
     //% rx.fieldEditor="gridpicker" rx.fieldOptions.columns=3
     //% rx.fieldOptions.tooltips="false"
-    //% blockGap=8 shim=edge_serial::redirect
+    //% blockGap=8 shim=edgeserial::redirect
     function redirect(tx: EdgeSerialPin, rx: EdgeSerialPin, rate: EdgeBaudRate): void;
 
     /**
     Set the baud rate of the serial port
      */
     //% weight=10
-    //% blockId=edge_serial_setbaudrate block="serial|set baud rate %rate"
+    //% blockId=edgeserial_setbaudrate block="serial|set baud rate %rate"
     //% blockGap=8 inlineInputMode=inline
     //% help=serial/set-baud-rate
-    //% group="Configuration" advanced=true shim=edge_serial::setBaudRate
+    //% group="Configuration" advanced=true shim=edgeserial::setBaudRate
     function setBaudRate(rate: EdgeBaudRate): void;
 
     /**
@@ -87,8 +87,8 @@ declare namespace edge_serial {
      * @param size length of the rx buffer in bytes, eg: 32
      */
     //% help=serial/set-rx-buffer-size
-    //% blockId=edge_serialSetRxBufferSize block="serial set rx buffer size to $size"
-    //% advanced=true shim=edge_serial::setRxBufferSize
+    //% blockId=edgeserialSetRxBufferSize block="serial set rx buffer size to $size"
+    //% advanced=true shim=edgeserial::setRxBufferSize
     function setRxBufferSize(size: uint8): void;
 
     /**
@@ -96,8 +96,8 @@ declare namespace edge_serial {
      * @param size length of the tx buffer in bytes, eg: 32
      */
     //% help=serial/set-tx-buffer-size
-    //% blockId=edge_serialSetTxBufferSize block="serial set tx buffer size to $size"
-    //% advanced=true shim=edge_serial::setTxBufferSize
+    //% blockId=edgeserialSetTxBufferSize block="serial set tx buffer size to $size"
+    //% advanced=true shim=edgeserial::setTxBufferSize
     function setTxBufferSize(size: uint8): void;
 }
 

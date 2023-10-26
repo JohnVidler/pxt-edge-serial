@@ -38,7 +38,7 @@
     //% block=1200
     BaudRate1200 = 1200,
     }
-declare namespace edge_serial {
+declare namespace edgeserial {
 }
 
 // Auto-generated. Do not edit. Really.
