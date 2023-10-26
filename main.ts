@@ -1,7 +1,7 @@
 /**
  * Reading and writing data over a serial connection.
  */
-//% weight=2 color=#ff2050 icon="\uf287"
+//% weight=2 color=#ff2050 icon="\uf287" block="Edge Serial"
 namespace edge_serial {
     /**
      * The string used to mark a new line, default is \r\n

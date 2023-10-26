@@ -2,7 +2,7 @@
 
 
 
-    //% weight=2 color=#ff2050 icon="\uf287"
+    //% weight=2 color=#ff2050 icon="\uf287" block="Edge Serial"
 declare namespace edge_serial {
 
     /**
@@ -62,15 +62,15 @@ declare namespace edge_serial {
      * @param rate the new baud rate. eg: 115200
      */
     //% weight=10
-    //% help=serial/redirect
-    //% blockId=edge_serial_redirect block="serial|redirect to|TX %tx|RX %rx|at baud rate %rate"
+    //% help=serial/connect
+    //% blockId=edge_serial_redirect block="serial|connect to|TX %tx|RX %rx|at baud rate %rate"
     //% blockExternalInputs=1
     //% tx.fieldEditor="gridpicker" tx.fieldOptions.columns=3
     //% tx.fieldOptions.tooltips="false"
     //% rx.fieldEditor="gridpicker" rx.fieldOptions.columns=3
     //% rx.fieldOptions.tooltips="false"
     //% blockGap=8 shim=edge_serial::redirect
-    function redirect(tx: EdgeSerialPin, rx: EdgeSerialPin, rate: BaudRate): void;
+    function redirect(tx: EdgeSerialPin, rx: EdgeSerialPin, rate: EdgeBaudRate): void;
 
     /**
     Set the baud rate of the serial port
@@ -80,7 +80,7 @@ declare namespace edge_serial {
     //% blockGap=8 inlineInputMode=inline
     //% help=serial/set-baud-rate
     //% group="Configuration" advanced=true shim=edge_serial::setBaudRate
-    function setBaudRate(rate: BaudRate): void;
+    function setBaudRate(rate: EdgeBaudRate): void;
 
     /**
      * Sets the size of the RX buffer in bytes

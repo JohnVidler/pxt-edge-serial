@@ -12,6 +12,32 @@
     P15 = 115,  // MICROBIT_ID_IO_P15
     P16 = 116,  // MICROBIT_ID_IO_P16
     }
+
+
+    declare const enum EdgeBaudRate {
+    //% block=115200
+    BaudRate115200 = 115200,
+    //% block=57600
+    BaudRate57600 = 57600,
+    //% block=38400
+    BaudRate38400 = 38400,
+    //% block=31250
+    BaudRate31250 = 31250,
+    //% block=28800
+    BaudRate28800 = 28800,
+    //% block=19200
+    BaudRate19200 = 19200,
+    //% block=14400
+    BaudRate14400 = 14400,
+    //% block=9600
+    BaudRate9600 = 9600,
+    //% block=4800
+    BaudRate4800 = 4800,
+    //% block=2400
+    BaudRate2400 = 2400,
+    //% block=1200
+    BaudRate1200 = 1200,
+    }
 declare namespace edge_serial {
 }
 
