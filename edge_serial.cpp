@@ -61,6 +61,7 @@ namespace edgeserial {
      * Read a line of text from the serial port and return the buffer when the delimiter is met.
      * @param delimiter text delimiter that separates each text chunk
      */
+    //% 
     String readUntil(String delimiter) {
         #if MICROBIT_CODAL
             checkSerialPort();
@@ -73,6 +74,7 @@ namespace edgeserial {
     /**
     * Read the buffered received data as a string
     */
+    //%
     String readString() {
         #if MICROBIT_CODAL
             checkSerialPort();
@@ -89,6 +91,7 @@ namespace edgeserial {
     * Register an event to be fired when one of the delimiter is matched.
     * @param delimiters the characters to match received characters against.
     */
+    //% 
     void onDataReceived(String delimiters, Action body) {
         #if MICROBIT_CODAL
             checkSerialPort();
@@ -102,6 +105,7 @@ namespace edgeserial {
     /**
      * Send a piece of text through the serial connection.
      */
+    //% 
     void writeString(String text) {
         #if MICROBIT_CODAL
             checkSerialPort();
@@ -115,6 +119,7 @@ namespace edgeserial {
     /**
     * Send a buffer through serial connection
     */
+    //% 
     void writeBuffer(Buffer buffer) {
         #if MICROBIT_CODAL
             checkSerialPort();
@@ -130,6 +135,7 @@ namespace edgeserial {
     * If length is positive, pauses until enough characters are present.
     * @param length default buffer length
     */
+    //% 
     Buffer readBuffer(int length) {
         #if MICROBIT_CODAL
             checkSerialPort();
@@ -169,6 +175,7 @@ namespace edgeserial {
     * @param rx the new reception pin, eg: EdgeSerialPin.P1
     * @param rate the new baud rate. eg: 115200
     */
+    //% 
     void redirect(EdgeSerialPin tx, EdgeSerialPin rx, EdgeBaudRate rate) {
         #if MICROBIT_CODAL
             checkSerialPort();
@@ -182,6 +189,7 @@ namespace edgeserial {
     /**
     Set the baud rate of the serial port
     */
+    //% 
     void setBaudRate(EdgeBaudRate rate) {
         #if MICROBIT_CODAL
             checkSerialPort();
@@ -193,6 +201,7 @@ namespace edgeserial {
     * Sets the size of the RX buffer in bytes
     * @param size length of the rx buffer in bytes, eg: 32
     */
+    //% 
     void setRxBufferSize(uint8_t size) {
         #if MICROBIT_CODAL
             checkSerialPort();
@@ -204,6 +213,7 @@ namespace edgeserial {
     * Sets the size of the TX buffer in bytes
     * @param size length of the tx buffer in bytes, eg: 32
     */
+    //% 
     void setTxBufferSize(uint8_t size) {
         #if MICROBIT_CODAL
             checkSerialPort();
