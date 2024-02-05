@@ -14,10 +14,6 @@ namespace edgeserial {
      * Print a line of text to the serial port
      * @param value to send over serial
      */
-    //% weight=90
-    //% help=serial/write-line blockGap=8
-    //% blockId=edgeserial_writeline block="serial|write line %text"
-    //% text.shadowOptions.toString=true
     export function writeLine(text: string): void {
         if (!text) text = "";
         edgeserial.writeString(text);
@@ -36,11 +32,6 @@ namespace edgeserial {
      * @param length the number of bytes alignment, eg: 0
      *
      */
-    //% weight=1
-    //% help=serial/set-write-line-padding
-    //% blockId=edgeserialWriteNewLinePadding block="serial set write line padding to $length"
-    //% advanced=true
-    //% length.min=0 length.max=128
     export function setWriteLinePadding(length: number) {
         writeLinePadding = length | 0;
     }
@@ -48,9 +39,6 @@ namespace edgeserial {
     /**
      * Print a numeric value to the serial port
      */
-    //% help=serial/write-number
-    //% weight=89 blockGap=8
-    //% blockId=edgeserial_writenumber block="serial|write number %value"
     export function writeNumber(value: number): void {
         writeString(value.toString());
     }
@@ -58,9 +46,6 @@ namespace edgeserial {
     /**
      * Print an array of numeric values as CSV to the serial port
      */
-    //% help=serial/write-numbers
-    //% weight=86
-    //% blockId=edgeserial_writenumbers block="serial|write numbers %values"
     export function writeNumbers(values: number[]): void {
         if (!values) return;
         for (let i = 0; i < values.length; ++i) {
@@ -75,9 +60,6 @@ namespace edgeserial {
      * @param name name of the value stream, eg: x
      * @param value to write
      */
-    //% weight=88 blockGap=8
-    //% help=serial/write-value
-    //% blockId=edgeserial_writevalue block="serial|write value %name|= %value"
     export function writeValue(name: string, value: number): void {
         writeLine((name ? name + ":" : "") + value);
     }
@@ -85,9 +67,6 @@ namespace edgeserial {
     /**
      * Read a line of text from the serial port.
      */
-    //% help=serial/read-line
-    //% blockId=edgeserial_read_line block="serial|read line"
-    //% weight=20 blockGap=8
     export function readLine(): string {
         return edgeserial.readUntil(delimiters(NEW_LINE_DELIMITER));
     }
@@ -95,8 +74,6 @@ namespace edgeserial {
     /**
      * Return the corresponding delimiter string
      */
-    //% blockId="edgeserial_delimiter_conv" block="%del"
-    //% weight=1 blockHidden=true
     export function delimiters(del: Delimiters): string {
         return String.fromCharCode(del as number);
     }
