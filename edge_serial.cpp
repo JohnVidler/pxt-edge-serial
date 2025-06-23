@@ -42,7 +42,6 @@ enum EdgeBaudRate {
   BaudRate1200 = 1200
 };
 
-//% weight=2 color=#ff2050 icon="\uf287" block="Edge Serial"
 namespace edgeserial {
 #if MICROBIT_CODAL
     NRF52Serial * edgeSerial = NULL;
@@ -57,13 +56,7 @@ namespace edgeserial {
 
     // note that at least one // followed by % is needed per declaration!
 
-    /**
-     * Read a line of text from the serial port and return the buffer when the delimiter is met.
-     * @param delimiter text delimiter that separates each text chunk
-     */
-    //% help=serial/read-until
-    //% blockId=edgeserial_read_until block="serial|read until %delimiter=edgeserial_delimiter_conv"
-    //% weight=19
+    //%
     String readUntil(String delimiter) {
         #if MICROBIT_CODAL
             checkSerialPort();
@@ -73,12 +66,18 @@ namespace edgeserial {
         #endif
     }
 
-    /**
-    * Read the buffered received data as a string
-    */
-    //% help=serial/read-string
-    //% blockId=edgeserial_read_buffer block="serial|read string"
-    //% weight=18
+    //%
+    void onDataReceived(String delimiters, Action body) {
+        #if MICROBIT_CODAL
+            checkSerialPort();
+            edgeSerial->eventOn(MSTR(delimiters));
+            registerWithDal(MICROBIT_ID_SERIAL, MICROBIT_SERIAL_EVT_DELIM_MATCH, body);
+            // lazy initialization of serial buffers
+            edgeSerial->read(MicroBitSerialMode::ASYNC);
+        #endif
+    }
+
+    //%
     String readString() {
         #if MICROBIT_CODAL
             checkSerialPort();
@@ -91,29 +90,11 @@ namespace edgeserial {
         #endif
     }
 
-    /**
-    * Register an event to be fired when one of the delimiter is matched.
-    * @param delimiters the characters to match received characters against.
-    */
-    //% help=serial/on-data-received
-    //% weight=18 blockId=edgeserial_on_data_received block="serial|on data received %delimiters=edgeserial_delimiter_conv"
-    void onDataReceived(String delimiters, Action body) {
-        #if MICROBIT_CODAL
-            checkSerialPort();
-            edgeSerial->eventOn(MSTR(delimiters));
-            registerWithDal(MICROBIT_ID_SERIAL, MICROBIT_SERIAL_EVT_DELIM_MATCH, body);
-            // lazy initialization of serial buffers
-            edgeSerial->read(MicroBitSerialMode::ASYNC);
-        #endif
-    }
+
 
     /**
      * Send a piece of text through the serial connection.
      */
-    //% help=serial/write-string
-    //% weight=87 blockGap=8
-    //% blockId=edgeserial_writestring block="serial|write string %text"
-    //% text.shadowOptions.toString=true
     void writeString(String text) {
         #if MICROBIT_CODAL
             checkSerialPort();
@@ -124,11 +105,7 @@ namespace edgeserial {
         #endif
     }
 
-    /**
-    * Send a buffer through serial connection
-    */
-    //% blockId=edgeserial_writebuffer block="serial|write buffer %buffer=edgeserial_readbuffer"
-    //% help=serial/write-buffer advanced=true weight=6
+    //%
     void writeBuffer(Buffer buffer) {
         #if MICROBIT_CODAL
             checkSerialPort();
@@ -139,13 +116,7 @@ namespace edgeserial {
         #endif
     }
 
-    /**
-    * Read multiple characters from the receive buffer. 
-    * If length is positive, pauses until enough characters are present.
-    * @param length default buffer length
-    */
-    //% blockId=edgeserial_readbuffer block="serial|read buffer %length"
-    //% help=serial/read-buffer advanced=true weight=5
+    //%
     Buffer readBuffer(int length) {
         #if MICROBIT_CODAL
             checkSerialPort();
@@ -170,6 +141,7 @@ namespace edgeserial {
         #endif
     }
 
+    //% 
     bool tryResolvePin(EdgeSerialPin p, PinName& name) {
         auto pin = getPin(p); 
         if (NULL != pin) {
@@ -179,21 +151,7 @@ namespace edgeserial {
         return false;
     }
 
-    /**
-    * Set the serial input and output to use pins instead of the USB connection.
-    * @param tx the new transmission pin, eg: EdgeSerialPin.P0
-    * @param rx the new reception pin, eg: EdgeSerialPin.P1
-    * @param rate the new baud rate. eg: 115200
-    */
-    //% weight=10
-    //% help=serial/connect
-    //% blockId=edgeserial_redirect block="serial|connect to|TX %tx|RX %rx|at baud rate %rate"
-    //% blockExternalInputs=1
-    //% tx.fieldEditor="gridpicker" tx.fieldOptions.columns=3
-    //% tx.fieldOptions.tooltips="false"
-    //% rx.fieldEditor="gridpicker" rx.fieldOptions.columns=3
-    //% rx.fieldOptions.tooltips="false"
-    //% blockGap=8
+    //%
     void redirect(EdgeSerialPin tx, EdgeSerialPin rx, EdgeBaudRate rate) {
         #if MICROBIT_CODAL
             checkSerialPort();
@@ -204,14 +162,7 @@ namespace edgeserial {
         #endif
     }
 
-    /**
-    Set the baud rate of the serial port
-    */
-    //% weight=10
-    //% blockId=edgeserial_setbaudrate block="serial|set baud rate %rate"
-    //% blockGap=8 inlineInputMode=inline
-    //% help=serial/set-baud-rate
-    //% group="Configuration" advanced=true
+    //%
     void setBaudRate(EdgeBaudRate rate) {
         #if MICROBIT_CODAL
             checkSerialPort();
@@ -219,13 +170,7 @@ namespace edgeserial {
         #endif
     }
 
-    /**
-    * Sets the size of the RX buffer in bytes
-    * @param size length of the rx buffer in bytes, eg: 32
-    */
-    //% help=serial/set-rx-buffer-size
-    //% blockId=edgeserialSetRxBufferSize block="serial set rx buffer size to $size"
-    //% advanced=true
+    //%
     void setRxBufferSize(uint8_t size) {
         #if MICROBIT_CODAL
             checkSerialPort();
@@ -233,13 +178,7 @@ namespace edgeserial {
         #endif
     }
 
-    /**
-    * Sets the size of the TX buffer in bytes
-    * @param size length of the tx buffer in bytes, eg: 32
-    */
-    //% help=serial/set-tx-buffer-size
-    //% blockId=edgeserialSetTxBufferSize block="serial set tx buffer size to $size"
-    //% advanced=true
+    //%
     void setTxBufferSize(uint8_t size) {
         #if MICROBIT_CODAL
             checkSerialPort();
