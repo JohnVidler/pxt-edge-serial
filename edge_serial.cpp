@@ -1,14 +1,6 @@
 #include "pxt.h"
 #if MICROBIT_CODAL
-    #ifndef NRFX_UARTE_ENABLED
-        #define NRFX_UARTE_ENABLED 1
-    #endif
-    #ifndef NRFX_UARTE1_ENABLED
-        #define NRFX_UARTE1_ENABLED 1
-    #endif
-
     #include "NRF52Serial.h"
-    #include "MicroBitPowerManager.h"
 #endif
 
 #define MICROBIT_SERIAL_READ_BUFFER_LENGTH 64
@@ -62,6 +54,8 @@ namespace edgeserial {
     }
 #endif
 
+    // note that at least one // followed by % is needed per declaration!
+
     //%
     String readUntil(String delimiter) {
         #if MICROBIT_CODAL
@@ -77,7 +71,7 @@ namespace edgeserial {
         #if MICROBIT_CODAL
             checkSerialPort();
             edgeSerial->eventOn(MSTR(delimiters));
-            //registerWithDal(MICROBIT_ID_SERIAL, MICROBIT_SERIAL_EVT_DELIM_MATCH, body);
+            registerWithDal(MICROBIT_ID_SERIAL, MICROBIT_SERIAL_EVT_DELIM_MATCH, body);
             // lazy initialization of serial buffers
             edgeSerial->read(MicroBitSerialMode::ASYNC);
         #endif
@@ -161,8 +155,9 @@ namespace edgeserial {
     void redirect(EdgeSerialPin tx, EdgeSerialPin rx, EdgeBaudRate rate) {
         #if MICROBIT_CODAL
             checkSerialPort();
-            if (getPin(tx) && getPin(rx))
-                edgeSerial->redirect( *getPin(tx), *getPin(rx) );
+            if (getPin(tx) && getPin(rx)) {
+                edgeSerial->redirect(*getPin(tx), *getPin(rx));
+            }
             edgeSerial->setBaud(rate);
         #endif
     }
