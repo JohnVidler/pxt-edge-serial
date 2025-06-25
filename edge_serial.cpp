@@ -1,6 +1,7 @@
 #include "pxt.h"
 #if MICROBIT_CODAL
     #include "NRF52Serial.h"
+    #define MICROBIT_USB_SERIAL_WAKE 1
 #endif
 
 #define MICROBIT_SERIAL_READ_BUFFER_LENGTH 64
